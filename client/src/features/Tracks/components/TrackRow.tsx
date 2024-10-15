@@ -1,20 +1,16 @@
-import React from 'react';
-import styles from './TrackRow.module.css'; 
-
-interface Track {
-  title: string;
-  main_artists: string[];
-}
+import React from "react";
+import styles from "./TrackRow.module.css";
+import { Track } from "../types/track";
 
 type TrackRowProps = {
   track: Track;
-  handlePlay: (track: Track) => void;
-}
+  updateTrack: (track: Track) => void;
+};
 
-const TrackRow: React.FC<TrackRowProps> = ({ track, handlePlay }) => {
+const TrackRow: React.FC<TrackRowProps> = ({ track, updateTrack }) => {
   return (
     <div className={styles.trackRow}>
-      <button className={styles.trackPlay} onClick={() => handlePlay(track)}>
+      <button className={styles.trackPlay} onClick={() => updateTrack(track)}>
         <svg
           width="24"
           height="24"
@@ -28,7 +24,7 @@ const TrackRow: React.FC<TrackRowProps> = ({ track, handlePlay }) => {
       <div className={styles.trackInfo}>
         <div className={styles.trackTitle}>{track.title}</div>
         <div className={styles.trackArtist}>
-          {track.main_artists.join(', ')}
+          {track.main_artists.join(", ")}
         </div>
       </div>
     </div>
