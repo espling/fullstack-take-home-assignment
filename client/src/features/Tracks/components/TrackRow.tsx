@@ -1,7 +1,17 @@
-import React from "react";
-import styles from "./TrackRow.module.css";
+import React from 'react';
+import styles from './TrackRow.module.css'; 
 
-function TrackRow({ track, handlePlay }) {
+interface Track {
+  title: string;
+  main_artists: string[];
+}
+
+type TrackRowProps = {
+  track: Track;
+  handlePlay: (track: Track) => void;
+}
+
+const TrackRow: React.FC<TrackRowProps> = ({ track, handlePlay }) => {
   return (
     <div className={styles.trackRow}>
       <button className={styles.trackPlay} onClick={() => handlePlay(track)}>
@@ -18,11 +28,11 @@ function TrackRow({ track, handlePlay }) {
       <div className={styles.trackInfo}>
         <div className={styles.trackTitle}>{track.title}</div>
         <div className={styles.trackArtist}>
-          {track.main_artists.join(", ")}
+          {track.main_artists.join(', ')}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default TrackRow;
