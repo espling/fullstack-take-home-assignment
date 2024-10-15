@@ -15,8 +15,9 @@ export function useTracks() {
     getTracks(abortController.signal)
       .then((response: Track[] | null) => {
         const data = response || [];
+        console.log("🚀 ~ .then ~ data:", data)
         setData(data);
-        setIsLoading(false);
+        // setIsLoading(false);
       })
       .catch((err) => {
         if (!abortController.signal.aborted) {

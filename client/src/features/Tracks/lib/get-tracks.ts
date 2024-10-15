@@ -1,8 +1,7 @@
 import { fetchTracks } from "./fetch-tracks";
 import { Track } from "../types/track";
-import { cacheData} from "../../../utils/cache-data"
+import { cacheData } from "../../../utils/cache-data";
 import { TRACK_STORAGE_KEY } from "../store/store-tracks";
-
 
 // export type GetTracks = [TrackResponse | null, boolean];
 
@@ -14,9 +13,8 @@ import { TRACK_STORAGE_KEY } from "../store/store-tracks";
  * ```ts
  * ```
  */
-export const getTracks = async (signal: AbortSignal): Promise<Track[] | null> => {
-      return await cacheData(
-        async () => fetchTracks(signal),
-        TRACK_STORAGE_KEY
-      );
+export const getTracks = async (
+  signal: AbortSignal
+): Promise<Track[] | null> => {
+  return await cacheData(async () => fetchTracks(signal), TRACK_STORAGE_KEY);
 };

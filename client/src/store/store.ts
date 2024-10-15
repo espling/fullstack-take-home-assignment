@@ -10,9 +10,7 @@ type LocalStorageKey = {
  * @param initialState - The initial state of the store.
  * @returns A store object.
  */
-export default function store<T extends LocalStorageKey>(
-  initialState: T
-) {
+export default function store<T extends LocalStorageKey>(initialState: T) {
   let state = initialState;
   const listeners = new Set<(state: T) => void>();
   const subscribe = (listener: (state: T) => void) => {

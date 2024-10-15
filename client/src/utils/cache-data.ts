@@ -11,12 +11,17 @@ export const cacheData = async <T>(
 ): Promise<T | null> => {
   const cachedData = LocalStorage.getItem<T>(cacheKey);
 
-  LocalStorage.setItem(cacheKey, {
-    ...cachedData,
-  });
+  if (cachedData) {
+    return new Promise((resolve) => {
+      resolve(cachedData);
+    });
+  }
+
+  // LocalStorage.setItem(cacheKey, {
+  //   ...cachedData,
+  // });
 
   const data = await fetchFn();
-
   if (!data) {
     return null;
   }
@@ -24,6 +29,8 @@ export const cacheData = async <T>(
   LocalStorage.setItem<T>(cacheKey, {
     ...data,
   });
+
+  LocalStorage.setItem<T>(cacheKey, data as T);
 
   return data;
 };
