@@ -1,23 +1,22 @@
+import { memo } from "react";
 import styles from "../../App.module.css";
 import { globalStore } from "../../store/global-store";
 
-import { memo } from "react";
-
 type NavButtonProps = {
-  label: string;
+  name: string;
   tab: number;
+  handleTabChange: (tab: number) => void;
 };
 
-const NavButton: React.FC<NavButtonProps> = ({ label, tab }) => {
-  const handleTabChange = (tab: number) => {
-    globalStore.setState({
-      ...globalStore.getState(),
-      selectedTab: tab,
-    });
-  };
+const NavButton: React.FC<NavButtonProps> = ({
+  name,
+  tab,
+  handleTabChange,
+}) => {
   return (
     <a
       href="#"
+      role="button"
       className={
         globalStore.useStore((state) => state.selectedTab === tab)
           ? styles.active
@@ -25,7 +24,7 @@ const NavButton: React.FC<NavButtonProps> = ({ label, tab }) => {
       }
       onClick={() => handleTabChange(tab)}
     >
-      {label}
+      {name}
     </a>
   );
 };

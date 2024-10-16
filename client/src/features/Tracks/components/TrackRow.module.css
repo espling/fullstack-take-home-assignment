@@ -1,8 +1,10 @@
 .trackRow {
-    display: flex;
+    display: grid;
+    position: relative;
     align-items: center;
     height: 5rem;
     border-bottom: 1px solid #333;
+    grid-template-columns: auto 2fr 1fr;
   }
   
   .trackRow:last-child {
@@ -26,5 +28,9 @@
   
   .trackArtist {
     color: #767676;
+  }
+
+  .trackInfo {
+    margin-inline: 1rem;
   }
   

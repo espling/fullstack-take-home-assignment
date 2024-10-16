@@ -1,6 +1,5 @@
 export class LocalStorage {
     static setItem<T>(key: string, payload: T) {
-      console.log("setItem", key, payload);
       localStorage.setItem(key, JSON.stringify(payload));
     }
   

@@ -1,0 +1,8 @@
+.Playlist {
+    display: grid;
+    align-items: center;
+    height: 5rem;
+    border-bottom: 1px solid #333;
+    grid-template-columns: auto 2fr 1fr;
+  }
+  

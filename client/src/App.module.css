@@ -1,34 +1,61 @@
 .app {
-    padding: 4rem;
-    min-height: 100vh;
-  }
+  padding: 4rem;
+  min-height: 100vh;
+  overflow-x: 
+}
+
+.logo {
+  width: 2rem;
+  height: auto;
+}
+
+.edit {
+  width: 1.2rem;
+  height: auto;
+}
+
+nav {
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  display: block;
+  max-width: 100%;
+}
+
+.menu {
+  max-width: 100vw;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-sizing: border-box;
+  display: flex;
+  /* display: block; */
   
-  .logo {
-    width: 2rem;
-    height: auto;
-  }
-  
-  .menu {
-    display: flex;
-    margin: 2rem 0;
-    padding: 0;
-  }
-  
-  .menu li {
-    list-style: none;
-    margin-right: 2rem;
-  }
-  
-  .menu li a {
-    display: block;
-    color: #767676;
-    text-decoration: none;
-    font-size: 1.25rem;
-    padding: 0.5rem 0;
-  }
-  
-  .menu li a.active {
-    color: #fff;
-    border-bottom: 2px solid #009de0;
-  }
-  
+  margin: 2rem 0;
+  padding: 0;
+
+
+}
+
+.menu li {
+  list-style: none;
+  margin-right: 2rem;
+}
+
+.menu li a {
+  display: block;
+  color: #767676;
+  text-decoration: none;
+  font-size: 1.25rem;
+  padding: 0.5rem 0;
+}
+
+.menu li a.active {
+  color: #fff;
+  border-bottom: 2px solid #009de0;
+}
+.rounded {
+  border-radius: 9999px;
+  padding: 0.5rem;
+}
+.green {
+  color: #22c55e;
+}
