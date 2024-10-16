@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { globalStore, NavItems } from "../../../store/global-store";
+import { globalStore, navItems, NavItems } from "../../../store/global-store";
 import { playListStore } from "../store/playlist-store";
 import { Tracks } from "../../../features/Tracks/components/Tracks";
 import { PlayList } from "../types/playlist";
@@ -13,17 +13,12 @@ export const PlayListPage: React.FC = () => {
   const deleteList = useCallback(() => {
     const playLists = playListStore.getState().playLists;
     const newPlayList = playLists.filter((list) => list.id !== playListId);
+
     playListStore.setState({
       ...playListStore.getState(),
       playLists: newPlayList,
     });
-
-    //     if (playListId === globalStore.getState().selectedPlaylistId) {
-    //       globalStore.setState({
-    //         ...globalStore.getState(),
-    //         selectedPlaylistId: "",
-    // }
-// console.log('newPlayList', newPlayList)
+   
     const playlistNavItems = newPlayList.map((item: PlayList, idx) => {
       const navItem: NavItems = {
         id: item.id,
@@ -37,7 +32,7 @@ export const PlayListPage: React.FC = () => {
       ...globalStore.getState(),
       selectedTab: 0,
       selectedPlaylistId: "",
-      navItems: playlistNavItems,
+      navItems: navItems.concat(playlistNavItems),
     });
   }, [playListId]);
 

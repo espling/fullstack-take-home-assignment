@@ -1,34 +1,17 @@
-import { useCallback } from "react";
-import { globalStore } from "../../../store/global-store";
 import { Track } from "../types/track";
 import TrackRow from "./TrackRow";
 import { playListStore } from "../../../features/Playlist/store/playlist-store";
+import { usePlaylistActions } from "../../Playlist/store/usePlaylistActions";
 
 type TrackProps = {
   tracks: Track[];
 };
 
 export const Tracks: React.FC<TrackProps> = ({ tracks }) => {
+  const { deleteTrackFromPlaylist, updateTrack, openPlaylistModal } =
+    usePlaylistActions();
+
   playListStore.useStore((state) => state.playLists);
-  const updateTrack = useCallback((track: Track) => {
-    globalStore.setState({
-      ...globalStore.getState(),
-      selectedSong: track,
-    });
-  }, []);
-
-  const openPlaylistModal = useCallback((track: Track) => {
-    globalStore.setState({
-      ...globalStore.getState(),
-      selectedTrackToAdd: track,
-    });
-
-    globalStore.setState({
-      ...globalStore.getState(),
-
-      showPlaylistModal: true,
-    });
-  }, []);
 
   return (
     <>
@@ -38,6 +21,7 @@ export const Tracks: React.FC<TrackProps> = ({ tracks }) => {
             key={ix}
             track={track}
             updateTrack={updateTrack}
+            deleteTrackFromPlaylist={deleteTrackFromPlaylist}
             openPlaylistModal={openPlaylistModal}
           />
         ))}

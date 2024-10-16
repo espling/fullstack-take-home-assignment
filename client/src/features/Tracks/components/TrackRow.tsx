@@ -8,6 +8,7 @@ import { globalStore } from "../../../store/global-store";
 type TrackRowProps = {
   track: Track;
   updateTrack: (track: Track) => void;
+  deleteTrackFromPlaylist: (track: Track) => void;
   isPlaying?: boolean;
   openPlaylistModal: (track: Track) => void;
 };
@@ -15,10 +16,9 @@ type TrackRowProps = {
 const TrackRow: React.FC<TrackRowProps> = ({
   track,
   updateTrack,
+  deleteTrackFromPlaylist,
   openPlaylistModal,
 }) => {
-
-  
   const isPlaying = globalStore.useStore(
     (state) => state.selectedSong === track
   );
@@ -46,12 +46,22 @@ const TrackRow: React.FC<TrackRowProps> = ({
             {track.main_artists.join(", ")}
           </div>
         </div>
-        <button
-          title="Add to playlist"
-          onClick={() => openPlaylistModal(track)}
-        >
-          Add
-        </button>
+        {globalStore.getState().selectedTab === 0 && (
+          <button
+            title="Add to playlist"
+            onClick={() => openPlaylistModal(track)}
+          >
+            Add
+          </button>
+        )}
+        {globalStore.getState().selectedTab > 1 && (
+          <button
+            title="Remove from playlist"
+            onClick={() => deleteTrackFromPlaylist(track)}
+          >
+            Remove
+          </button>
+        )}
       </div>
     </div>
   );

@@ -17,6 +17,9 @@ const NavButton: React.FC<NavButtonProps> = ({
     <a
       href="#"
       role="button"
+      style={{
+        ...(tab === -1 && {color: "#399", fontWeight: "w900"}),
+      }}
       className={
         globalStore.useStore((state) => state.selectedTab === tab)
           ? styles.active

@@ -8,8 +8,8 @@ export const PauseIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M10 5H7V19H10V5ZM17 5H14V19H17V5Z"
         fill="white"
       />

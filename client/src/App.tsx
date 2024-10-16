@@ -4,11 +4,12 @@ import { Tracks } from "./features/Tracks/components/Tracks";
 import { Nav } from "./components/Nav/Nav";
 import AudioWrapper from "./features/Player/components/AudioPlayer/AudioWrapper";
 import { PlayListPage } from "./features/Playlist/components/PlayListPage";
-import Dialog from "./components/Dialog/Dialog";
 import { DialogAddToPlaylist } from "./features/Tracks/components/DialogAddToPlaylist";
 
 function App() {
   const { data } = useTracks();
+  globalStore.useStore((state) => state.showPlaylistModal);
+
   return (
     <>
       <Nav>
@@ -20,7 +21,7 @@ function App() {
         )}
       </Nav>
       <AudioWrapper />
-      <DialogAddToPlaylist />
+      {globalStore.getState().showPlaylistModal && <DialogAddToPlaylist />}
     </>
   );
 }

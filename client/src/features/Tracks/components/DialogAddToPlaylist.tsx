@@ -11,8 +11,9 @@ export const DialogAddToPlaylist: React.FC = () => {
   const playLists = playListStore.useStore((state) => state.playLists);
 
   const addToPlaylist = useCallback(
-    (event: ChangeEvent<HTMLInputElement> | null) => {
-      if (event) {
+    (e: ChangeEvent<HTMLInputElement | HTMLDialogElement> | null) => {
+      if (e) {
+        const event = e as ChangeEvent<HTMLInputElement>;
         if (selectedOption === event.target.value) {
           setSelectedOption("");
         } else {
@@ -20,6 +21,7 @@ export const DialogAddToPlaylist: React.FC = () => {
         }
 
         const selectedTrackToAdd = globalStore.getState().selectedTrackToAdd;
+
         if (selectedTrackToAdd) {
           const pl = playLists.map((list) => {
             if (list.id === event.target.value) {
@@ -42,25 +44,27 @@ export const DialogAddToPlaylist: React.FC = () => {
   );
 
   return (
-    <Dialog showModal={false} callback={addToPlaylist}>
-      {playLists && (
-        <RadioGroup legend={"Add track to playlist"}>
-          {playLists.length === 0 && <p>No playlists available</p>}
-          {playLists?.map((list) => {
-            return (
-              <RadioButton
-                key={list.id}
-                id={list.id}
-                name={list.name}
-                value={list.id}
-                labelText={list.name}
-                checked={selectedOption.toString() === list.id}
-                onChange={addToPlaylist}
-              />
-            );
-          })}
-        </RadioGroup>
-      )}
-    </Dialog>
+    <>
+      <Dialog showModal={false} callback={addToPlaylist}>
+        {playLists && (
+          <RadioGroup legend={"Add track to playlist"}>
+            {playLists.length === 0 && <p>No playlists available</p>}
+            {playLists?.map((list) => {
+              return (
+                <RadioButton
+                  key={list.id}
+                  id={list.id}
+                  name={list.name}
+                  value={list.id}
+                  labelText={list.name}
+                  checked={selectedOption.toString() === list.id}
+                  onChange={addToPlaylist}
+                />
+              );
+            })}
+          </RadioGroup>
+        )}
+      </Dialog>
+    </>
   );
 };
