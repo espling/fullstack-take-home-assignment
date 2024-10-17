@@ -11,7 +11,7 @@ type NavProps = {
 export const Nav: React.FC<NavProps> = ({ children }) => {
   const { createPlaylist } = usePlaylistActions();
   const navButtons = globalStore.useStore((state) => state.navItems);
-
+  
   const handleTabChange = (tab: number) => {
     globalStore.setState({
       ...globalStore.getState(),
