@@ -1,6 +1,6 @@
 import { LocalStorage } from "../../../utils/local-storage.ts";
-import { playListStore } from "../../../features/Playlist/store/playlist-store.ts";
-import { PlayList, PlayLists } from "../../../features/Playlist/types/playlist";
+import { playListStore } from "../../Playlist/store/playlist-store.ts";
+import { PlayList, PlayLists } from "../../Playlist/types/playlist.ts";
 import { useEffect } from "react";
 import {
   globalStore,

@@ -5,7 +5,7 @@ import { Nav } from "./components/Nav/Nav";
 import AudioWrapper from "./features/Player/components/AudioPlayer/AudioWrapper";
 import { PlayListPage } from "./features/Playlist/components/PlayListPage";
 import { DialogAddToPlaylist } from "./features/Tracks/components/DialogAddToPlaylist";
-import { useInitStore } from "./features/Tracks/hooks/use-playlists";
+import { useInitStore } from "./features/Tracks/hooks/use-init-store";
 
 function App() {
   const { data } = useTracks();

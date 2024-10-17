@@ -17,6 +17,7 @@ const NavButton: React.FC<NavButtonProps> = ({
     <a
       href="#"
       role="button"
+      title={name}
       style={{
         ...(tab === -1 && {color: "#399", fontWeight: "w900"}),
       }}

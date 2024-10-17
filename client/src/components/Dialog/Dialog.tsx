@@ -56,7 +56,7 @@ const Dialog: FC<DialogProps> = ({ children, callback }) => {
     <div className="App">
       <dialog id="dialog" ref={dialogRef}>
         {children}
-        <button id="close" onClick={closeDialog}>
+        <button id="close" onClick={closeDialog} title="Close">
           Close
         </button>
       </dialog>

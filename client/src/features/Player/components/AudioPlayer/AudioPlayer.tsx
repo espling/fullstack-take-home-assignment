@@ -54,6 +54,7 @@ const AudioPlayer: React.FC<AudioPlayer> = ({ track }) => {
       <audio src={track.audio} ref={audioRef} />
       <div className={styles.audioPlayer}>
         <button
+        title="Toggle playback"
           className={styles.togglePlaybackButton}
           onClick={handleTogglePlaybackClick}
         >
