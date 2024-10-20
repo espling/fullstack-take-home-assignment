@@ -3,8 +3,6 @@ import { Track } from "../types/track";
 import { cacheData } from "../../../utils/cache-data";
 import { TRACK_STORAGE_KEY } from "../store/store-tracks";
 
-// export type GetTracks = [TrackResponse | null, boolean];
-
 /**
  * Get all Tracks. The Tracks can be cached in local storage.
  * @returns A list of tracks.

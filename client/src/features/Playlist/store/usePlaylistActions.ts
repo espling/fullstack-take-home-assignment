@@ -26,10 +26,28 @@ export const usePlaylistActions = () => {
   }, []);
 
   const updateTrack = useCallback((track: Track) => {
-    globalStore.setState({
-      ...globalStore.getState(),
-      selectedSong: track,
-    });
+    const ref = globalStore.getState().audioRef?.current;
+    const selectedSong = globalStore.getState().selectedSong;
+    const isPlaying = globalStore.getState().isPlaying;
+    if (track.id !== selectedSong?.id) {
+      globalStore.setState({
+        ...globalStore.getState(),
+        selectedSong: track,
+        isPlaying: true,
+      });
+    } else {
+      if (ref) {
+        if (ref?.paused) {
+          ref?.play();
+        } else {
+          ref?.pause();
+        }
+        globalStore.setState({
+          ...globalStore.getState(),
+          isPlaying: !isPlaying,
+        });
+      }
+    }
   }, []);
 
   const openPlaylistModal = useCallback((track: Track) => {
@@ -60,7 +78,7 @@ export const usePlaylistActions = () => {
       const navItem: NavItems = {
         id: item.id,
         name: item.name,
-        tab: 2 + idx, // 2 is the index of the first 2 playlist tab
+        tab: idx + 1,
       };
       return navItem;
     });

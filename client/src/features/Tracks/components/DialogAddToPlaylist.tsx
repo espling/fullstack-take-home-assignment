@@ -49,15 +49,15 @@ export const DialogAddToPlaylist: React.FC = () => {
         {playLists && (
           <RadioGroup legend={"Add track to playlist"}>
             {playLists.length === 0 && <p>No playlists available</p>}
-            {playLists?.map((list) => {
+            {playLists?.map(({id, name}) => {
               return (
                 <RadioButton
-                  key={list.id}
-                  id={list.id}
-                  name={list.name}
-                  value={list.id}
-                  labelText={list.name}
-                  checked={selectedOption.toString() === list.id}
+                  key={id}
+                  id={id}
+                  name={name}
+                  value={id}
+                  labelText={name}
+                  checked={selectedOption.toString() === id}
                   onChange={addToPlaylist}
                 />
               );

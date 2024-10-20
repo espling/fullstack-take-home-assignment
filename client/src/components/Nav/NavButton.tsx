@@ -13,14 +13,13 @@ const NavButton: React.FC<NavButtonProps> = ({
   tab,
   handleTabChange,
 }) => {
+  const selected = globalStore.useStore((state) => state.selectedTab === tab)
   return (
     <a
       href="#"
+      aria-selected={selected}
       role="button"
       title={name}
-      style={{
-        ...(tab === -1 && {color: "#399", fontWeight: "w900"}),
-      }}
       className={
         globalStore.useStore((state) => state.selectedTab === tab)
           ? styles.active

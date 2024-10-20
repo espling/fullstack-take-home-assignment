@@ -1,4 +1,5 @@
 import { useTracks } from "./features/Tracks/hooks/use-tracks";
+import styles from "./App.module.css";
 import { globalStore } from "./store/global-store";
 import { Tracks } from "./features/Tracks/components/Tracks";
 import { Nav } from "./components/Nav/Nav";
@@ -11,19 +12,16 @@ function App() {
   const { data } = useTracks();
   useInitStore();
   globalStore.useStore((state) => state.showPlaylistModal);
+  const selectedTab = globalStore.useStore((state) => state.selectedTab);
   return (
-    <>
+    <div className={styles.app}>
       <Nav>
-        {globalStore.useStore((state) => state.selectedTab === 0) && (
-          <Tracks tracks={data ?? []} />
-        )}
-        {globalStore.useStore((state) => state.selectedTab > 1) && (
-          <PlayListPage />
-        )}
+        {selectedTab === 0 && <Tracks tracks={data ?? []} />}
+        {selectedTab > 0 && <PlayListPage />}
       </Nav>
       <AudioWrapper />
       {globalStore.getState().showPlaylistModal && <DialogAddToPlaylist />}
-    </>
+    </div>
   );
 }
 

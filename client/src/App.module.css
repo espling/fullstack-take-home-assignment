@@ -1,7 +1,15 @@
+:root {
+  --appPadding: 0.2rem;
+  --contentWidth: var(--appWidth);
+  --padding: max(1rem, 10vw - var(--contentWidth) / 2);
+  --appWidth: calc(clamp(45ch, 50%, 75ch) - var(--appPadding));
+}
+
 .app {
-  padding: 4rem;
+  box-sizing: border-box;
+  width: min(100%, 800px);
   min-height: 100vh;
-  overflow-x: 
+  padding-inline: var(--padding);
 }
 
 .logo {
@@ -18,7 +26,7 @@ nav {
   overflow-y: hidden;
   scroll-behavior: smooth;
   display: block;
-  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .menu {
@@ -27,12 +35,8 @@ nav {
   white-space: nowrap;
   box-sizing: border-box;
   display: flex;
-  /* display: block; */
-  
   margin: 2rem 0;
   padding: 0;
-
-
 }
 
 .menu li {

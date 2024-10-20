@@ -1,15 +1,15 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./TrackRow.module.css";
 import { Track } from "../types/track";
-import { PlayIcon } from "../../../icons/PlayIcon";
-import { PauseIcon } from "../../../icons/PauseIcon";
+
 import { globalStore } from "../../../store/global-store";
+import Button from "../../../components/Button/Button";
+import { TrackPlayButton } from "./TrackPlayButton";
 
 type TrackRowProps = {
   track: Track;
   updateTrack: (track: Track) => void;
   deleteTrackFromPlaylist: (track: Track) => void;
-  isPlaying?: boolean;
   openPlaylistModal: (track: Track) => void;
 };
 
@@ -19,20 +19,15 @@ const TrackRow: React.FC<TrackRowProps> = ({
   deleteTrackFromPlaylist,
   openPlaylistModal,
 }) => {
-  const isPlaying = globalStore.useStore(
-    (state) => state.selectedSong === track
+  globalStore.useStore(
+    (state) => state.selectedSong?.id === track.id && state.isPlaying
   );
 
   return (
     <div>
       <div className={styles.trackRow}>
-        <button
-          className={styles.trackPlay}
-          title="Play song"
-          onClick={() => updateTrack(track)}
-        >
-          {!isPlaying ? <PlayIcon /> : <PauseIcon />}
-        </button>
+        <TrackPlayButton track={track} updateTrack={updateTrack} />
+
         <div className={styles.trackInfo}>
           <div
             style={{
@@ -47,24 +42,22 @@ const TrackRow: React.FC<TrackRowProps> = ({
           </div>
         </div>
         {globalStore.getState().selectedTab === 0 && (
-          <button
-            title="Add to playlist"
+          <Button
+            label={"Add"}
+            title={"Add to playlist"}
             onClick={() => openPlaylistModal(track)}
-          >
-            Add
-          </button>
+          ></Button>
         )}
-        {globalStore.getState().selectedTab > 1 && (
-          <button
-            title="Remove from playlist"
+        {globalStore.getState().selectedTab > 0 && (
+          <Button
+            label={"Remove"}
+            title={"Remove from playlist"}
             onClick={() => deleteTrackFromPlaylist(track)}
-          >
-            Remove
-          </button>
+          ></Button>
         )}
       </div>
     </div>
   );
 };
 
-export default TrackRow;
+export default memo(TrackRow);

@@ -3,6 +3,7 @@ import { globalStore, navItems, NavItems } from "../../../store/global-store";
 import { playListStore } from "../store/playlist-store";
 import { Tracks } from "../../../features/Tracks/components/Tracks";
 import { PlayList } from "../types/playlist";
+import Button from "../../../components/Button/Button";
 
 export const PlayListPage: React.FC = () => {
   const playListId = globalStore.useStore((state) => state.selectedPlaylistId);
@@ -18,12 +19,12 @@ export const PlayListPage: React.FC = () => {
       ...playListStore.getState(),
       playLists: newPlayList,
     });
-   
+
     const playlistNavItems = newPlayList.map((item: PlayList, idx) => {
       const navItem: NavItems = {
         id: item.id,
         name: item.name,
-        tab: 2 + idx, // 2 is the index of the first 2 playlist tab
+        tab: idx + 1,
       };
       return navItem;
     });
@@ -46,7 +47,13 @@ export const PlayListPage: React.FC = () => {
         }}
       >
         <div>
-          <button onClick={deleteList}>Delete playlist</button>
+          <Button
+            onClick={deleteList}
+            title="Delete playlist"
+            label={"Delete playlist"}
+          >
+            Delete playlist
+          </Button>
         </div>
       </div>
       <Tracks tracks={list.tracks ?? []} />

@@ -1,6 +1,7 @@
 import "./Dialog.module.css";
 import { useRef, FC, useEffect, ChangeEvent, useCallback } from "react";
 import { globalStore } from "../../store/global-store";
+import Button from "../Button/Button";
 
 type DialogProps = {
   children: React.ReactNode;
@@ -53,14 +54,12 @@ const Dialog: FC<DialogProps> = ({ children, callback }) => {
   };
 
   return (
-    <div className="App">
+    <>
       <dialog id="dialog" ref={dialogRef}>
         {children}
-        <button id="close" onClick={closeDialog} title="Close">
-          Close
-        </button>
+        <Button label={"OK"} title={"Close dialog"} onClick={closeDialog} />
       </dialog>
-    </div>
+    </>
   );
 };
 
