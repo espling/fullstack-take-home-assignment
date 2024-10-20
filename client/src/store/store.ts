@@ -8,7 +8,14 @@ type LocalStorageKey = {
 /**
  * Create a store with a given initial state.
  * @param initialState - The initial state of the store.
+ * Add a storageKey to the state to save the state in local storage.
  * @returns A store object.
+ * * @example
+ * ```ts
+ * const store = store<MyGlobalStateType>({
+ *  selectedTab: 0,
+ *  selectedPlaylistId: null});
+ * ```
  */
 export default function store<T extends LocalStorageKey>(initialState: T) {
   let state = initialState;

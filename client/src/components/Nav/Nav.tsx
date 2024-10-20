@@ -10,7 +10,7 @@ type NavProps = {
 };
 
 export const Nav: React.FC<NavProps> = ({ children }) => {
-  const { createPlaylist } = usePlaylistActions();
+  const { openCreatePlaylistModal } = usePlaylistActions();
   const navButtons = globalStore.useStore((state) => state.navItems);
 
   const handleTabChange = (tab: number) => {
@@ -24,19 +24,12 @@ export const Nav: React.FC<NavProps> = ({ children }) => {
   return (
     <>
       <main className={styles.app}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "1rem",
-          }}
-        >
+        <div className={styles.header}>
           <img src={logo} className={styles.logo} alt="Logo" />
           <Button
             title={"Create playlist"}
             label={"Create playlist"}
-            onClick={createPlaylist}
+            onClick={openCreatePlaylistModal}
           />
         </div>
         <nav>

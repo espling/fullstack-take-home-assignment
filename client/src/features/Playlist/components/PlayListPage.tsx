@@ -56,7 +56,7 @@ export const PlayListPage: React.FC = () => {
           </Button>
         </div>
       </div>
-      <Tracks tracks={list.tracks ?? []} />
+      <Tracks tracks={list?.tracks ?? []} />
     </>
   );
 };

@@ -1,7 +1,5 @@
-import "./Dialog.module.css";
-import { useRef, FC, useEffect, ChangeEvent, useCallback } from "react";
+import { FC, useEffect, ChangeEvent, useCallback } from "react";
 import { globalStore } from "../../store/global-store";
-import Button from "../Button/Button";
 
 type DialogProps = {
   children: React.ReactNode;
@@ -12,22 +10,29 @@ type DialogProps = {
 };
 
 const Dialog: FC<DialogProps> = ({ children, callback }) => {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
-  const showModal = globalStore.useStore((state) => state.showPlaylistModal);
+  const dialogRef = globalStore.useStore((state) => state.dialogRef);
+  const showPlayListModal = globalStore.useStore(
+    (state) => state.showPlaylistModal
+  );
+  const showCreatePlayListModal = globalStore.useStore(
+    (state) => state.showCreatePlaylistModal
+  );
 
   useEffect(() => {
-    if (dialogRef.current && showModal) {
+    if (dialogRef?.current && (showPlayListModal || showCreatePlayListModal)) {
       dialogRef.current.showModal();
     }
-  }, [showModal]);
+  }, [dialogRef, showCreatePlayListModal, showPlayListModal]);
 
   const handleClose = useCallback(
     (event: ChangeEvent<HTMLInputElement | HTMLDialogElement> | null) => {
-      globalStore.setState({
+        globalStore.setState({
         ...globalStore.getState(),
         selectedTrackToAdd: null,
         showPlaylistModal: false,
+        showCreatePlaylistModal: false,
         selectedPlaylistId: "",
+        selectedTab: 0,
       });
       if (callback) callback(event);
     },
@@ -35,7 +40,7 @@ const Dialog: FC<DialogProps> = ({ children, callback }) => {
   );
 
   useEffect(() => {
-    const dialog = dialogRef.current;
+    const dialog = dialogRef?.current;
     if (dialog) {
       dialog.addEventListener("close", () => handleClose(null));
 
@@ -43,21 +48,12 @@ const Dialog: FC<DialogProps> = ({ children, callback }) => {
         dialog.removeEventListener("close", () => handleClose(null));
       };
     }
-  }, [handleClose]);
-
-  const closeDialog = () => {
-    if (dialogRef.current) {
-      if (dialogRef.current && showModal) {
-        dialogRef.current.close();
-      }
-    }
-  };
+  }, [dialogRef, handleClose]);
 
   return (
     <>
       <dialog id="dialog" ref={dialogRef}>
         {children}
-        <Button label={"OK"} title={"Close dialog"} onClick={closeDialog} />
       </dialog>
     </>
   );

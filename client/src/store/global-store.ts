@@ -10,6 +10,7 @@ export type GlobalStore = {
   storageKey: string | null;
   showPlaylistModal?: boolean;
   audioRef?: React.RefObject<HTMLAudioElement>;
+  dialogRef?: React.RefObject<HTMLDialogElement>;
   showCreatePlaylistModal?: boolean;
   showDeletePlaylistModal?: boolean;
   navItems: NavItems[];

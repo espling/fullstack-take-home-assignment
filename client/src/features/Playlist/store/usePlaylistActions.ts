@@ -64,11 +64,19 @@ export const usePlaylistActions = () => {
     });
   }, []);
 
-  const createPlaylist = () => {
+  const openCreatePlaylistModal = useCallback(() => {
+    globalStore.setState({
+      ...globalStore.getState(),
+      showPlaylistModal: false,
+      showCreatePlaylistModal: true,
+    });
+  }, []);
+
+  const createPlaylist = (name: string) => {
     const playLists = playListStore.getState().playLists;
     const newPlaylist = {
       id: uuidv4(),
-      name: `New Playlist ${playLists.length + 1}`,
+      name: name ?? `New Playlist ${playLists.length + 1}`,
       tracks: [],
     };
 
@@ -100,6 +108,7 @@ export const usePlaylistActions = () => {
     deleteTrackFromPlaylist,
     updateTrack,
     openPlaylistModal,
+    openCreatePlaylistModal,
     createPlaylist,
   };
 };

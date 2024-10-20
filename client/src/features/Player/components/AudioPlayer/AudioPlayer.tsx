@@ -16,10 +16,6 @@ const AudioPlayer: React.FC<AudioPlayer> = ({ track, audioRef }) => {
     track,
   });
 
-  useEffect(() => {
-    console.log("test");
-  }, []);
-
   return (
     <>
       <div className={styles.audioPlayer}>

@@ -12,6 +12,13 @@
   padding-inline: var(--padding);
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
 .logo {
   width: 2rem;
   height: auto;
